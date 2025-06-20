@@ -84,7 +84,7 @@ class MainWindow(QWidget, WindowsAPIBS):
         
         self.emails = []
         self.max_emails = 10
-        self.load_emails(on_startup=True) # set to true
+        self.load_emails(on_startup=True)
         self.setLayout(self.layout)
         self.position_at_bottom()
         
