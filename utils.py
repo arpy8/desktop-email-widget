@@ -1,3 +1,4 @@
+import psutil
 import ctypes
 from ctypes import wintypes
 from windows_toasts import Toast, WindowsToaster
@@ -54,3 +55,20 @@ def show_toast(title="Email Alert", message="You have a new high priority email!
     newToast = Toast()
     newToast.text_fields = [message]
     toaster.show_toast(newToast)
+    
+    
+def janitor_bhaiyo(response):
+    lines = response.splitlines()
+    if lines and lines[0].startswith("```"):
+        lines = lines[1:]
+    if lines and lines[-1].strip() == "```":
+        lines = lines[:-1]
+
+    return "\n".join(lines)
+
+def is_charger_plugged_in():
+    battery = psutil.sensors_battery()
+    if battery is None:
+        return None
+    
+    return battery.power_plugged

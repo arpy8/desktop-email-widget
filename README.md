@@ -14,7 +14,6 @@ A desktop widget to monitor your Gmail inbox and display recent emails with AI-e
 ├── monitor.py         # Development hot-reload script
 ├── logs.json          # Email cache (auto-generated)
 ├── user_config.json   # User configuration (auto-generated)
-├── .env.example       # Environment variables template
 └── assets/
     └── logo.ico       # Application icon
 ```

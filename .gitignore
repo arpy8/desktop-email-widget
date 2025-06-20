@@ -4,6 +4,6 @@ build/
 __pycache__/
 
 .env
-.spec
-logs.json
-user_config.json
+
+*.json
+*.spec

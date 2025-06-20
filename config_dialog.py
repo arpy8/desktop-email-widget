@@ -3,13 +3,14 @@ import os
 from PyQt5.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel, 
                              QLineEdit, QPushButton, QMessageBox, QFormLayout)
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QIcon
 
 
 class ConfigDialog(QDialog):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Email Widget Configuration")
+        self.setWindowIcon(QIcon('assets/icon.ico'))
+        self.setWindowTitle("Desktop Email Widget Configuration")
         self.setFixedSize(400, 250)
         self.setWindowFlags(Qt.Dialog | Qt.WindowTitleHint | Qt.WindowCloseButtonHint)
         
@@ -19,45 +20,48 @@ class ConfigDialog(QDialog):
     def setup_ui(self):
         layout = QVBoxLayout()
         
-        # Title
         title = QLabel("First Time Setup")
         title.setFont(QFont("Arial", 14, QFont.Bold))
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
         
-        # Description
-        desc = QLabel("Please enter your Gmail credentials to continue:")
+        desc = QLabel('Please enter your Gmail credentials to continue.')
         desc.setAlignment(Qt.AlignCenter)
+        desc.setOpenExternalLinks(True)
         layout.addWidget(desc)
         
-        # Form layout
+        # link_label = QLabel('<a href="https://support.google.com/accounts/answer/185833?hl=en">How to enable access for less secure apps</a>')
+        # link_label.setAlignment(Qt.AlignCenter)
+        # link_label.setOpenExternalLinks(True)
+        # layout.addWidget(link_label)
+        
         form_layout = QFormLayout()
         
-        # Email input
         self.email_input = QLineEdit()
-        self.email_input.setPlaceholderText("your-email@gmail.com")
+        self.email_input.setPlaceholderText("johndoe@gmail.com")
         form_layout.addRow("Email:", self.email_input)
         
-        # Password input
         self.password_input = QLineEdit()
         self.password_input.setEchoMode(QLineEdit.Password)
-        self.password_input.setPlaceholderText("App Password")
+        self.password_input.setPlaceholderText("abcd abcd abcd abcd")
         form_layout.addRow("App Password:", self.password_input)
         
-        # Gemini API Key input
+        desc = QLabel('<a href="https://myaccount.google.com/apppasswords">How do I get my password?</a>')
+        form_layout.addRow("", desc)
+        desc.setOpenExternalLinks(True)
+        
         self.api_key_input = QLineEdit()
-        self.api_key_input.setPlaceholderText("Google Gemini API Key")
+        self.api_key_input.setPlaceholderText("AIz................8w")
         form_layout.addRow("Gemini API Key:", self.api_key_input)
         
         layout.addLayout(form_layout)
         
-        # Buttons
         button_layout = QHBoxLayout()
         
         cancel_btn = QPushButton("Cancel")
         cancel_btn.clicked.connect(self.reject)
         
-        save_btn = QPushButton("Save & Continue")
+        save_btn = QPushButton("Save")
         save_btn.clicked.connect(self.save_config)
         save_btn.setDefault(True)
         
@@ -108,3 +112,17 @@ class ConfigDialog(QDialog):
         except Exception as e:
             QMessageBox.critical(self, "Error", 
                                f"Failed to save configuration: {str(e)}")
+
+
+if __name__=="__main__":
+    import sys
+    from PyQt5.QtWidgets import QApplication
+    
+    app = QApplication(sys.argv)
+    dialog = ConfigDialog()
+    if dialog.exec_() == QDialog.Accepted:
+        print("Configuration saved successfully.")
+    else:
+        print("Configuration cancelled.")
+    
+    sys.exit(app.exec_())
