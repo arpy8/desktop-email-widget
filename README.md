@@ -2,6 +2,9 @@
 
 A desktop widget to monitor your Gmail inbox and display recent emails with AI-enhanced summaries and priority indicators. The widget appears/disappears based on desktop visibility and provides hover previews of email content.
 
+## Preview
+![image](https://github.com/user-attachments/assets/fb021e5a-ec3b-4a45-ab0c-0af039791ac4)
+
 ## Project Structure
 
 ```text
